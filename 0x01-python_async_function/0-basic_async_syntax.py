@@ -9,7 +9,7 @@ import random
 import asyncio
 
 
-def wait_random(max_delay: int = 10) -> float:
+async def wait_random(max_delay: int = 10) -> float:
     """
     A simple coroutine.
 
@@ -22,5 +22,5 @@ def wait_random(max_delay: int = 10) -> float:
     Randomly generated number (floats included)
     """
     rand_num = random.uniform(0, max_delay)
-    asyncio.sleep(rand_num)
+    await asyncio.sleep(rand_num)
     return rand_num
