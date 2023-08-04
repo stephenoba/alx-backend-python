@@ -76,5 +76,6 @@ class TestMemoize(unittest.TestCase):
             self.assertEqual(real_return, 42)
             patched.assert_called_once()
 
+
 if __name__ == '__main__':
     unittest.main()
