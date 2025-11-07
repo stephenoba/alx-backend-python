@@ -64,8 +64,8 @@ def connect_to_prodev():
     try:
         connection = pymysql.connect(
             host="localhost",
-            user="user",
-            password="password",
+            user="developer",
+            password="2x+2y=26XY",
             database="ALX_prodev",
             cursorclass=pymysql.cursors.DictCursor
         )
