@@ -1,7 +1,16 @@
 import sqlite3 
 import functools
 
-with_db_connection = __import__('1-with_db_connection').with_db_connection
+def with_db_connection(func):
+    @functools.wraps(func) 
+    def wrapper(*args, **kwargs): 
+        conn = sqlite3.connect('users.db') 
+        try: 
+            result = func(conn, *args, **kwargs) 
+            return result 
+        finally: 
+            conn.close() 
+    return wrapper 
 
 def transactional(func):
     """
