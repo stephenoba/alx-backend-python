@@ -16,3 +16,12 @@ class DatabaseConnection:
     def __exit__(self, type, value, traceback):
         if self.conn:
             self.conn.close()
+
+
+# Example usage:
+if __name__ == "__main__":
+    with DatabaseConnection('users.db') as conn:
+        cursor = conn.cursor()
+        cursor.execute("SELECT * FROM users")
+        users = cursor.fetchall()
+        print(users)
