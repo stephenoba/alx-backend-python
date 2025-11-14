@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+import uuid
 
 
 class Role(models.TextChoices):
@@ -10,7 +11,7 @@ class Role(models.TextChoices):
 
 class User(AbstractUser):
     """Custom user model extending AbstractUser."""
-    user_id = models.UUIDField(primary_key=True, editable=False)
+    user_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     first_name = models.CharField(max_length=30, null=False, blank=False)
     last_name = models.CharField(max_length=30, null=False, blank=False)
     email = models.EmailField(unique=True, null=False, blank=False)
