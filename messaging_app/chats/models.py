@@ -26,7 +26,7 @@ class User(AbstractUser):
 
 class Message(models.Model):
     """Model representing a chat message."""
-    message_id = models.UUIDField(primary_key=True, editable=False)
+    message_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     sender_id = models.ForeignKey(User, on_delete=models.CASCADE, related_name='messages')
     message_body = models.TextField(null=False, blank=False)
     sent_at = models.DateTimeField(auto_now_add=True)
@@ -37,7 +37,7 @@ class Message(models.Model):
 
 class Conversation(models.Model):
     """Model representing a conversation between users."""
-    conversation_id = models.UUIDField(primary_key=True, editable=False)
+    conversation_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     participants_id = models.ForeignKey(User, on_delete=models.CASCADE, related_name='conversations')
     created_at = models.DateTimeField(auto_now_add=True)
 
