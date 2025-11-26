@@ -18,7 +18,6 @@ class Command(BaseCommand):
     def handle(self, *args, **kwargs):
         seeder = Seed.seeder()
 
-        # Seed Users first
         seeder.add_entity(User, 10, {
             'first_name': lambda x: seeder.faker.first_name(),
             'last_name': lambda x: seeder.faker.last_name(),
@@ -28,7 +27,6 @@ class Command(BaseCommand):
             'role': lambda x: seeder.faker.random_element(elements=['guest', 'host', 'admin']),
         })
 
-        # Seed Conversations
         seeder.add_entity(Conversation, 5, {
            'participants_id': lambda x: User.objects.order_by('?').first(),
         })
@@ -37,7 +35,6 @@ class Command(BaseCommand):
         def _pks(mapping, model):
             return mapping.get(model) or mapping.get(model.__name__) or []
 
-        # Now seed Messages and ensure each message has a conversation and sender
         seeder2 = Seed.seeder()
         seeder2.add_entity(Message, 20, {
             'sender_id': lambda x: User.objects.order_by('?').first(),
