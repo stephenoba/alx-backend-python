@@ -16,7 +16,7 @@ class MessageAdmin(admin.ModelAdmin):
 
 @admin.register(Conversation)
 class ConversationAdmin(admin.ModelAdmin):
-    list_display = ('conversation_id', 'participants_id', 'created_at')
+    list_display = ('conversation_id', 'created_at')
     search_fields = ('participants_id__email',)
     list_filter = ('created_at',)
 

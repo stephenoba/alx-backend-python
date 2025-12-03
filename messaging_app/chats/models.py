@@ -38,8 +38,8 @@ class Message(models.Model):
 class Conversation(models.Model):
     """Model representing a conversation between users."""
     conversation_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    participants_id = models.ForeignKey(User, on_delete=models.CASCADE, related_name='conversations')
+    participants_id = models.ManyToManyField(User, related_name='conversations')
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"Conversation {self.conversation_id} with participant {self.participants_id.email}"
+        return f"Conversation {self.conversation_id}"
