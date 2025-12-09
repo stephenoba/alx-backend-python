@@ -2,15 +2,17 @@ from datetime import datetime
 
 class RequestLoggingMiddleware:
     """
-    Middleware that logs each incoming request's method and path.
+    Middleware that logs each user’s requests to a file, including the timestamp, user and the request path.
     """
 
     def __init__(self, get_response):
         self.get_response = get_response
 
     def __call__(self, request):
-        # Log the request time, user and path
-        print(f"{datetime.now()} - User: {request.user} - Path: {request.path}")
+        user = request.user if request.user.is_authenticated else 'Anonymous'
+        log_entry = f"{datetime.now().isoformat()} - User: {user} - Path: {request.path}\n"
+        with open('requests.log', 'a') as log_file:
+            log_file.write(log_entry)
 
         response = self.get_response(request)
         return response
